@@ -3,7 +3,7 @@ class Params:
         self.window_model = 0
         self.window_list = [(1280, 720), (1920, 1080), (2560, 1440)]
 
-        self.MATRIX_SIZE = (40, 20)
+        self.MATRIX_SIZE = (60, 30)
         self.BLOCK_SIZE = 0
         self.WINDOW_MIN = 0
         self.WINDOW_MEDIUM = 1

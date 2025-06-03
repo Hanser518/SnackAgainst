@@ -1,9 +1,14 @@
 from collections import deque
 import pygame.sprite
-from entity.params import Params
-
+from model.params import Params
 
 class Agent(pygame.sprite.Sprite):
+
+    NORMAL_AGENT = "agent"
+    REWARD_AGENT = "reward"
+    BUFF_AGENT = "buff"
+    PREDICT_AGENT = "predict"
+
     def __init__(self, params: Params, location):
         super().__init__()
         self.params = params
@@ -27,10 +32,7 @@ class Agent(pygame.sprite.Sprite):
         self.rect.x = self.location[0] * self.size
         self.rect.y = self.location[1] * self.size
 
-        # 轨迹记录
-        self.deque_size = 1
-        self.entity_deque = deque()
-
+        self.label = "agent"
         self.alive = True
 
     def load_animation_frames(self):
@@ -39,6 +41,7 @@ class Agent(pygame.sprite.Sprite):
         self.static_frame = pygame.image.load("resource/agent/agent_static.png").convert_alpha()
         self.head_frame = pygame.image.load("resource/agent/agent_head.png").convert_alpha()
         self.reward_frame = pygame.image.load("resource/agent/agent_reward.png").convert_alpha()
+        self.predict_frame = pygame.image.load("resource/agent/agent_predict.png").convert_alpha()
 
         # 动态帧序列
         self.animation_frames = {}
@@ -78,6 +81,10 @@ class Agent(pygame.sprite.Sprite):
             self.image = pygame.transform.smoothscale(self.reward_frame, (self.size, self.size))
             self.rect = self.image.get_rect(center=self.rect.center)
 
+        elif self.frame_state == "predict":
+            self.image = pygame.transform.smoothscale(self.predict_frame, (self.size, self.size))
+            self.rect = self.image.get_rect(center=self.rect.center)
+
         elif self.frame_state == "light" or self.frame_state == "extinct" or self.frame_state == "reward":
             # 控制动画更新频率
             if self.animation_timer >= self.animation_speed:
@@ -88,6 +95,7 @@ class Agent(pygame.sprite.Sprite):
                     if self.frame_state == "light":
                         self.set_state("static")
                     elif self.frame_state == "extinct":
+                        self.kill()
                         self.alive = False
                     elif self.frame_state == "reward":
                         self.set_state("reward_finish")
@@ -110,6 +118,12 @@ class Agent(pygame.sprite.Sprite):
     def set_location(self, locatin):
         self.rect.x = locatin[0] * self.size
         self.rect.y = locatin[1] * self.size
+
+    def set_agent_label(self, label):
+        self.label = label
+
+    def get_agent_label(self):
+        return self.label
 
     def confirm_state(self, state: str):
         if self.frame_state == state:
