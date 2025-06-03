@@ -12,7 +12,7 @@ class Agent(pygame.sprite.Sprite):
         # 初始化尺寸参数
         self.w_size, self.h_size = self.params.get_window_size()
         self.w_limit, self.h_limit = self.params.get_matrix_size()
-        self.size = self.w_size // self.w_limit
+        self.size = self.params.BLOCK_SIZE
 
         # 预加载所有动画帧
         self.load_animation_frames()
@@ -128,5 +128,3 @@ class Agent(pygame.sprite.Sprite):
 
     def is_dynamic(self):
         return self.confirm_state("light") or self.confirm_state("extinct") or self.confirm_state("reward")
-
-

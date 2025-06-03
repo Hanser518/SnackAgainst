@@ -4,42 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30c6f034-e09d-4071-84a2-d86bf727aff3" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pygProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/agent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/agent_link.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/matrix.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/params.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_extinct_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_extinct_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_extinct_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_extinct_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_extinct_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_extinct_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_head.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_light_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_light_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_light_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_light_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_light_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_light_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_reward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_reward_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_reward_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_reward_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_reward_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_reward_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_reward_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resource/agent/agent_static.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+    <list default="true" id="30c6f034-e09d-4071-84a2-d86bf727aff3" name="更改" comment="初始化项目">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/entity/agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/entity/matrix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/params.py" beforeDir="false" afterPath="$PROJECT_DIR$/entity/params.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +27,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Hanser518"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Hanser518/SnackAgainst.git",
+    "accountId": "2133db6d-822d-4185-aeda-376996196926"
+  }
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 0
 }]]></component>
@@ -80,7 +63,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Code Search",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -93,8 +76,8 @@
       <recent name="D:\Code\Python\pygProject\resource\agent" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.index">
-    <configuration name="index" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pygProject" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -108,7 +91,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/index.py" />
+      <option name="SCRIPT_NAME" value="D:\Code\Python\pygProject\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -142,7 +125,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.index" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -163,15 +146,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748912349030</updated>
-      <workItem from="1748912350148" duration="15669000" />
+      <workItem from="1748912350148" duration="16563000" />
     </task>
+    <task id="LOCAL-00001" summary="初始化项目">
+      <option name="closed" value="true" />
+      <created>1748939343814</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1748939343814</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="初始化项目" />
+    <option name="LAST_COMMIT_MESSAGE" value="初始化项目" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pygProject$test.coverage" NAME="test 覆盖结果" MODIFIED="1748914458497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pygProject$index.coverage" NAME="index 覆盖结果" MODIFIED="1748938837567" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pygProject$index.coverage" NAME="index 覆盖结果" MODIFIED="1748939739276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

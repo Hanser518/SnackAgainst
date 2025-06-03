@@ -95,7 +95,7 @@ class AgentLink():
                 return location[0] - 1, location[1]
 
     def access_speed(self):
-        self.update_speed = 0.124
+        self.update_speed = 0.125
 
     def is_out_of_limit(self):
         pos = self.get_next_pos(self.location, self.direction)

@@ -22,9 +22,9 @@ agent = Agent(params, (30, 10))
 frame_count = 0
 frame_limit = 120
 
-dt = 1
+font = pygame.font.Font("resource/font/HYPixel11pxU-2.ttf", 24)
 
-player_pos = pygame.Vector2(80, 45)
+dt = 1
 
 while running:
     # poll for events
@@ -36,8 +36,6 @@ while running:
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("black")
 
-    pygame.draw.circle(screen, "gray", player_pos, 40)
-
     # screen.blit(agent.image, agent.rect)
     agent_link.draw(screen)
     mtrx.draw(screen)
@@ -45,16 +43,12 @@ while running:
     press_keys = pygame.key.get_pressed()
 
     if press_keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
         agent_link.set_direction(0)
     if press_keys[pygame.K_s]:
-        player_pos.y += 300 * dt
         agent_link.set_direction(2)
     if press_keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
         agent_link.set_direction(3)
     if press_keys[pygame.K_d]:
-        player_pos.x += 300 * dt
         agent_link.set_direction(1)
 
     if press_keys[pygame.K_SPACE]:
@@ -72,6 +66,18 @@ while running:
         frame_count = 0
     else:
         frame_count += 1
+
+    agent_length = font.render(f"Agent count: {agent_link.agent_count}", True, "white")
+    length_rect = agent_length.get_rect()
+    length_rect.topleft = (20, params.INFO_HEIGHT)
+    screen.blit(agent_length, length_rect)
+
+    agent_speed = font.render(f"Agent speed: {1 / agent_link.update_speed}", True, "white")
+    speed_rect = agent_speed.get_rect()
+    speed_rect.topleft = (20, speed_rect.height + length_rect.y)
+    screen.blit(agent_speed, speed_rect)
+
+    pygame.display.set_caption(f"{clock.get_fps() :.1f}")
 
     pygame.display.flip()
 

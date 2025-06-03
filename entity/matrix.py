@@ -28,7 +28,7 @@ class Mtrx:
             self.update_timer = 0
 
             temple = 0
-            agent = Agent(self.params, (0,0))
+            agent = Agent(self.params, (0, 0))
             agent.alive = False
             while True:
                 x = np.random.randint(0, self.rows)
@@ -47,7 +47,6 @@ class Mtrx:
         for agent in self.reward_list:
             agent.update(dt)
 
-
     def draw(self, screen):
         for agent in self.reward_list:
             screen.blit(agent.image, agent.rect)
@@ -58,10 +57,3 @@ class Mtrx:
                 self.reward_list.remove(reward)
                 return True
         return False
-
-
-
-
-
-
-
