@@ -141,4 +141,7 @@ class Agent(pygame.sprite.Sprite):
         return self.alive
 
     def is_dynamic(self):
+    # if self.confirm_state("static"):
+    #     return True
+    # else:
         return self.confirm_state("light") or self.confirm_state("extinct") or self.confirm_state("reward")

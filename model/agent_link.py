@@ -1,3 +1,4 @@
+import heapq
 import random
 from collections import deque
 
@@ -14,6 +15,8 @@ class AgentLink():
         self.update_timer = 0
         self.update_speed = 0.25
         self.direction = 1
+
+        self.slow_down_speed = True
 
         self.params = params
         self.w_limit, self.h_limit = params.get_matrix_size()
@@ -46,7 +49,8 @@ class AgentLink():
 
         for agent in remove_list:
             self.agent_deque.remove(agent)
-        self.update_speed = min(0.25, self.update_speed * 1.2)
+        if self.slow_down_speed:
+            self.update_speed = min(0.25, self.update_speed * 1.2)
 
     def add_agent_count(self):
         self.agent_count += 1
@@ -158,3 +162,10 @@ class AgentLink():
                 if head.rect.colliderect(agent.rect):
                     return True, index
         return False, -1
+
+    def set_no_slow(self):
+        self.slow_down_speed = False
+
+    def set_speed(self, value):
+        self.update_speed = value
+

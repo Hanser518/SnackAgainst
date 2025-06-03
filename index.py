@@ -18,6 +18,8 @@ mtrx = Mtrx(params, width, height)
 # agent = Agent(params, location=(width // 2, height // 2))
 agent_link = AgentLink(params, location=(width // 2, height // 2))
 against_link = AgentLink(params, location=(0, 0))
+against_link.set_no_slow()
+against_link.set_speed(0.0625)
 
 frame_count = 0
 frame_limit = 240
@@ -39,8 +41,9 @@ while running:
     against_link.draw(screen)
     mtrx.draw(screen)
 
-    press_keys = pygame.key.get_pressed()
+    agent_link.set_direction_auto(mtrx)
 
+    press_keys = pygame.key.get_pressed()
     if press_keys[pygame.K_w]:
         agent_link.set_direction(0)
     if press_keys[pygame.K_s]:
@@ -61,11 +64,9 @@ while running:
         against_link.add_agent_count()
 
     dt = clock.tick(frame_limit) / 1000
-
     agent_link.update(dt)
 
     against_link.set_direction_auto(mtrx)
-    against_link.access_speed(0.0625)
     against_link.update(dt)
 
     mtrx.update(dt)
