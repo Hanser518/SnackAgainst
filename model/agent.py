@@ -93,7 +93,7 @@ class Agent(pygame.sprite.Sprite):
                 # 更新帧索引
                 if self.frame_index > len(self.animation_frames[self.frame_state]) - 1:
                     if self.frame_state == "light":
-                        self.set_state("static")
+                        self.set_state("head")
                     elif self.frame_state == "extinct":
                         self.kill()
                         self.alive = False
@@ -141,7 +141,8 @@ class Agent(pygame.sprite.Sprite):
         return self.alive
 
     def is_dynamic(self):
-    # if self.confirm_state("static"):
-    #     return True
-    # else:
-        return self.confirm_state("light") or self.confirm_state("extinct") or self.confirm_state("reward")
+        # if self.confirm_state("static"):
+        #     return True
+        # else:
+        #     return self.confirm_state("light") or self.confirm_state("extinct") or self.confirm_state("reward")
+        return True

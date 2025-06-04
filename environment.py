@@ -1,5 +1,6 @@
 import numpy as np
 import pygame
+from mpmath import scorergi
 
 from model.agent_link import AgentLink
 from model.matrix import Mtrx
@@ -20,8 +21,8 @@ class Environment:
         # agent = Agent(params, location=(width // 2, height // 2))
         self.agent_link = AgentLink(self.params, location=(width // 2, height // 2))
         self.against_link = AgentLink(self.params, location=(0, 0))
-        self.against_link.set_no_slow()
-        self.against_link.set_speed(0.0625)
+        # self.against_link.set_no_slow()
+        # self.against_link.set_speed(0.0625)
 
         self.frame_count = 0
         self.frame_limit = 240
@@ -31,6 +32,8 @@ class Environment:
         self.access_speed = 0.0625
 
         self.dt = 1
+        self.update_frame = False
+        self.dt_record = 0
 
     def run(self):
         for event in pygame.event.get():
@@ -43,7 +46,7 @@ class Environment:
         self.against_link.draw(self.screen)
         self.mtrx.draw(self.screen)
 
-        self.agent_link.set_direction_auto(self.mtrx)
+        # self.agent_link.set_direction_auto(self.mtrx)
 
         press_keys = pygame.key.get_pressed()
         if press_keys[pygame.K_w]:
@@ -58,17 +61,21 @@ class Environment:
         if press_keys[pygame.K_SPACE]:
             self.agent_link.access_speed(self.access_speed)
 
-        # flip() the display to put your work on screen
-
         if self.mtrx.crash(self.agent_link.get_head_agent()):
             self.agent_link.add_agent_count()
         if self.mtrx.crash(self.against_link.get_head_agent()):
             self.against_link.add_agent_count()
 
         dt = self.clock.tick(self.frame_limit) / 1000
-        self.agent_link.update(dt)
+        self.dt_record += dt
+        if self.dt_record > self.agent_link.update_speed:
+            self.update_frame = True
+            self.dt_record = 0
+        else:
+            self.update_frame = False
 
         self.against_link.set_direction_auto(self.mtrx)
+        self.agent_link.update(dt)
         self.against_link.update(dt)
 
         self.mtrx.update(dt)
@@ -77,43 +84,63 @@ class Environment:
         else:
             self.frame_count += 1
 
-        agent_length = self.font.render(f"Score: {self.agent_link.agent_count}", True, "white")
-        length_rect = agent_length.get_rect()
-        length_rect.topleft = (20, self.params.INFO_HEIGHT)
-        self. screen.blit(agent_length, length_rect)
-
-        agent_speed = self.font.render(f"Speed: {1 / self.agent_link.update_speed :.1f}", True, "white")
-        speed_rect = agent_speed.get_rect()
-        speed_rect.topleft = (20, speed_rect.height + length_rect.y)
-        self.screen.blit(agent_speed, speed_rect)
-
-        against_length = self.font.render(f"Ai Score: {self.against_link.agent_count}", True, "white")
-        against_lengthrect = against_length.get_rect()
-        against_lengthrect.topleft = (self.params.INFO_WIDTH // 2, self.params.INFO_HEIGHT)
-        self.screen.blit(against_length, against_lengthrect)
-
-        against_speed = self.font.render(f"Ai Speed: {1 / self.against_link.update_speed :.1f}", True, "white")
-        against_speed_rect = against_speed.get_rect()
-        against_speed_rect.topleft = (against_lengthrect.x, against_speed_rect.height + against_lengthrect.y)
-        self.screen.blit(against_speed, against_speed_rect)
+        values = {"player 1": self.agent_link, "ai player": self.against_link}
+        self.show_agent_info(values)
 
         pygame.display.set_caption(f"FPS：{self.clock.get_fps() :.1f}")
 
         pygame.display.flip()
 
-    def trans_state(self):
+    def show_agent_info(self, values):
+        count = len(values)
+        index = 0
+        for name, agent in values.items():
+            agent_score = self.font.render(f"{name} score: {agent.score_record}", True, "white")
+            score_rect = agent_score.get_rect()
+            score_rect.topleft = (index / count * self.params.INFO_WIDTH, self.params.INFO_HEIGHT)
+            self.screen.blit(agent_score, score_rect)
+
+            agent_speed = self.font.render(f"Speed: {1 / agent.update_speed :.1f}", True, "white")
+            speed_rect = agent_speed.get_rect()
+            speed_rect.topleft = (score_rect.x, speed_rect.height + score_rect.y)
+            self.screen.blit(agent_speed, speed_rect)
+
+            agent_length = self.font.render(f"Length: {agent.agent_count}", True, "white")
+            length_rect = agent_length.get_rect()
+            length_rect.topleft = (index / count * self.params.INFO_WIDTH, length_rect.height + speed_rect.y)
+            self.screen.blit(agent_length, length_rect)
+
+            index += 1
+
+    def get_agent_state(self, agent: AgentLink):
         reward_map = self.mtrx.matrix
-        agent_map = np.zeros_like(reward_map)
-        position_map = np.zeros_like(reward_map)
+        agent_map = np.zeros_like(reward_map, dtype=np.float32)
+        position_map = np.zeros_like(reward_map, dtype=np.float32)
 
-        agent_group = self.against_link.agent_group
-        for agent in agent_group:
-            agent_map[agent.location] = 1
+        agent_group = agent.agent_group
+        for agent_sub in agent_group:
+            agent_map[agent_sub.location] = 1.0
 
-        head_agent = self.against_link.get_head_agent()
-        position_map[head_agent.location] = 1
+        head_agent = agent.get_head_agent()
+        position_map[head_agent.location] = 1.0
 
-        return np.stack([reward_map, agent_map, position_map], axis=2)
+        return np.stack([position_map, agent_map, reward_map], axis=2)
+
+    def get_state_shape(self):
+        return self.mtrx.matrix.shape + (3,)
+
+    def set_action(self, agent: AgentLink, action: int):
+        agent.set_direction(action)
+
+    def get_agent_score(self, agent: AgentLink):
+        return agent.score_record
+
+    def get_agent_length(self, agent: AgentLink):
+        return agent.agent_count
+
+    def get_agent_action(self, agent: AgentLink):
+        return agent.direction
+
 
 if __name__ == "__main__":
     env = Environment()

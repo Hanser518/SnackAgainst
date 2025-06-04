@@ -12,7 +12,9 @@ from model.params import Params
 
 class AgentLink():
     def __init__(self, params: Params, location):
+        self.step_record = 0
         self.update_timer = 0
+        self.normal_speed = 0.25
         self.update_speed = 0.25
         self.direction = 1
 
@@ -21,6 +23,7 @@ class AgentLink():
         self.params = params
         self.w_limit, self.h_limit = params.get_matrix_size()
         self.agent_count = 3
+        self.score_record = 0
         self.agent_deque = deque()
 
         self.agent_group = pygame.sprite.Group()
@@ -50,10 +53,11 @@ class AgentLink():
         for agent in remove_list:
             self.agent_deque.remove(agent)
         if self.slow_down_speed:
-            self.update_speed = min(0.25, self.update_speed * 1.2)
+            self.update_speed = min(self.normal_speed, self.update_speed * 1.2)
 
     def add_agent_count(self):
         self.agent_count += 1
+        self.score_record += 1
 
     def set_direction(self, direction: int):
         anti_direction = (self.direction + 2) % 4
@@ -113,6 +117,9 @@ class AgentLink():
             for i in range(index):
                 self.agent_deque[i].set_state("extinct")
             self.agent_count = max(1, self.agent_count - index)
+            self.score_record -= 3
+
+        self.step_record += 1
 
     def update(self, dt):
         for agent in self.agent_deque:

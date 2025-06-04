@@ -7,7 +7,7 @@ class Mtrx:
     def __init__(self, params, rows, cols):
         self.rows = rows
         self.cols = cols
-        self.matrix = np.array(np.zeros((rows, cols)))
+        self.matrix = np.array(np.zeros((rows, cols)), dtype=np.float32)
         self.params = params
 
         self.reward_list = []

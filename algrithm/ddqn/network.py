@@ -46,6 +46,7 @@ class ReplayBuffer:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def push(self, state, action, reward, next_state, done):
+        # print(state.shape, action, reward, next_state.shape, done)
         self.buffer.append((state, action, reward, next_state, done))
 
     def sample(self, batch_size: int):
